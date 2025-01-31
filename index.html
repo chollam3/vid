@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Touch!</title>
+  <link href="hrf.css" rel="stylesheet">
+  <link href="fnt.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
+<style>
+   body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      padding: 0px;
+      color: #000;
+      overflow: hidden;
+    }
+
+    #subtitle {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide any overflowing text */
+}
+    #touch-instruction {
+      display: none;
+      position: absolute;
+      
+      left: 50%;
+      transform: translateX(-50%);
+      color: #888;
+      font-size: 18px;
+    }
+  </style>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-image: url('sky.png'); /* Replace with a valid image URL or path */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    /* Moving element 1 */
+    #ch {
+      position: fixed;
+      top: 90px;
+      width: 100px;
+      animation: moveCh 10s linear infinite;
+    }
+
+    @keyframes moveCh {
+      from {
+        left: 100%;
+      }
+      to {
+        left: -250px;
+      }
+    }
+
+    /* Moving element 2 */
+    #ttl {
+      position: fixed;
+      top: 180px;
+      width: 50px;
+      animation: moveTtl 10s linear infinite;
+    }
+
+    @keyframes moveTtl {
+      from {
+        left: -250px;
+      }
+      to {
+        left: 100%;
+      }
+    }
+
+    /* Moving logo at the bottom */
+    #logo {
+      position: fixed;
+      bottom: 20px;
+      width: 100px;
+      animation: moveLogo 20s linear infinite;
+    }
+
+    @keyframes moveLogo {
+      from {
+        left: -250px;
+      }
+      to {
+        left: 100%;
+      }
+    }
+
+    /* Bottom right logo and slogan */
+    .bottom-logo {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .text-logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .slogan {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Moving GIF -->
+  <img id="ch" src="ch.gif" alt="Moving Logo 1">
+  
+  <!-- Static Images -->
+  <img src="fl.png" style="width: 400px; height: auto; position: fixed; bottom: 0px; left: 0px;">
+   <img src="ttr.webp" style="width: 400px; height: auto; position: fixed; bottom: 10px; left: 0px;">
+  
+<img src="grs.png" style="width: 400px; height: auto; position: fixed; bottom: 0px; left: 0px;">
+  <!-- Bottom Text Logo -->
+  <div class="bottom-logo">
+    <div class="text-logo">চল্লাম | Chollam</div>
+    <div class="slogan">চল্লাম জ্ঞানের পথে!</div>
+  </div>
+
+  <!-- Moving GIF 2 -->
+  <img id="ttl" src="ttl.gif" alt="Moving Logo 2">
+
+  <!-- Moving Bottom GIF -->
+  
+   <img id="logo" src="hd.gif" alt="Moving Logo 3">
+  
+   <!-- Subtitle -->
+  
+  <div id="subtitle">বিসমিল্লাহির রহমানির রহীম।</div>
+<div id="touch-instruction"></div>
+
+<script>
+  const subtitles = [
+    "আসসালামু আলাইকুম।",
+    "চল্লামে আপনাদেরকে স্বাগতম।",
+    "চল্লাম জ্ঞানের পথে।",
+    "নতুন এবং পুরাতন জানা", 
+   "অজানা তথ্য জানতে আমাদের", 
+   "চ্যানেলে চোখ রাখুন।",
+    "লাইক, কমেন্ট, শেয়ার এবং", 
+   "সাবস্ক্রাইব করতে ভুলবেন না।",
+    "ধন্যবাদ ভিডিওটি দেখার জন্য!"
+  ];
+
+
+    let currentIndex = 0;
+    const subtitleDiv = document.getElementById('subtitle');
+    const touchInstruction = document.getElementById('touch-instruction');
+
+    function showNextSubtitle() {
+      if (currentIndex < subtitles.length) {
+        subtitleDiv.textContent = subtitles[currentIndex];
+        currentIndex++;
+        touchInstruction.style.display = 'none';
+      } else {
+        subtitleDiv.textContent = "চল্লাম জ্ঞানের পথে।";
+      }
+    }
+
+    function handleNoTouch() {
+      if (currentIndex < subtitles.length) {
+        touchInstruction.style.display = 'block';
+      }
+    }
+
+    // Initial touch event to start showing subtitles
+    document.body.addEventListener('touchstart', () => {
+      showNextSubtitle();
+    });
+
+    // Set a timeout to show the "Touch to continue" if no action
+    document.body.addEventListener('touchend', () => {
+      setTimeout(handleNoTouch, 5000);
+    });
+  </script>
+  
+  
+</body>
+</html>
